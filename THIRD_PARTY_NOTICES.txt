@@ -17,6 +17,14 @@ The build excludes several long-tail diagram types and KaTeX; see
 `build-trim/build-trimmed.mjs` for the exclusion list and `build.sh` for how the
 bundle is inlined.
 
+@mermaid-js/layout-elk 0.1.4 and elkjs 0.9.3
+------------------------------------------
+Layout adapter license: MIT
+Source: https://github.com/mermaid-js/mermaid (npm @mermaid-js/layout-elk)
+ELK engine license: Eclipse Public License 2.0
+Source: https://github.com/kieler/elkjs
+Bundled for offline layout; resolved versions are in build-trim/package-lock.json.
+
 esbuild 0.28.2 (build tool, not shipped)
 ---------------------------------------
 License: MIT
@@ -24,7 +32,8 @@ Source: https://github.com/evanw/esbuild
 
 The bundled output also contains code from mermaid's transitive dependencies
 as resolved by the pinned lockfile above (for example dagre, d3 modules,
-lodash modules, stylis, khroma, cytoscape), each under its own MIT license.
+lodash modules, stylis, khroma, cytoscape), under their respective licenses.
+The EPL-2.0 text for elkjs is included in licenses/elkjs-EPL-2.0.txt.
 Their exact versions are recorded in `build-trim/package-lock.json`.
 
 Mermaid's own license text

@@ -15,8 +15,8 @@ minified output is committed without the build inputs that produce it.
 
 ## Diagram types
 
-Built on a trimmed mermaid v11.4.1 bundle (~1.2MB inline, sized for the
-community catalog's review gate). Included: flowchart, sequence, class,
+Built on a trimmed Mermaid v11.4.1 bundle with offline ELK layout (about 2.9 MB
+inline). Included: flowchart, sequence, class,
 state, ER, gantt, git graph, pie. Excluded long-tail types (architecture,
 block, c4, kanban, mindmap, sankey, packet, xychart, quadrant, requirement,
 journey, info, timeline, radiation) and KaTeX math raise a clear
@@ -39,6 +39,39 @@ both light and dark.
 
 Mermaid 11.4.1 is bundled inline (plugin frames allow inline scripts only, so the
 editor works offline and never reaches the network).
+
+## Layout and fitting
+
+The Layout selector changes the preview without editing or saving diagram source:
+
+- **Source** respects the file's Mermaid configuration (the initial selection).
+- **Adaptive** uses Dagre for short flowcharts and ELK for flowcharts longer than
+  30 lines or containing multiple subgraphs.
+- **Dagre** and **ELK** explicitly select a flowchart layout engine.
+
+Other diagram types retain their own layout and disable the selector. ELK is
+bundled locally, including when a file requests `layout: elk` in Source mode.
+Layout selection preserves node connections, labels, and direction.
+
+**Auto-fit** starts enabled and fits the entire diagram after rendering and panel
+resizing, including split-divider changes. Manual zoom or panning turns Auto-fit
+off so resizing preserves the chosen view. **Fit** or double-clicking the chart
+fits it again and re-enables Auto-fit. On narrow panels Split stacks source above
+the preview; wider panels show them side by side.
+
+## Build and checks
+
+```sh
+npm ci --prefix build-trim
+node build.mjs
+node --test tests/editor.test.cjs
+orca plugin check . --json
+```
+
+The generated `editor/index.html` is the plugin entry point and must be rebuilt
+after changing its template or bundled runtime. ELK increases the inline bundle
+size beyond the previous community-catalog size target. This change is for local
+use; catalog publication requires a separate size review.
 
 ## Install
 
