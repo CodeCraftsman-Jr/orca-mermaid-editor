@@ -25,10 +25,10 @@ the bundle with a different selection, see `build-trim/` and `build.sh`.
 
 ## Views
 
-- **Chart** — the rendered diagram, with wheel zoom, drag panning, and
+- **Chart:** the rendered diagram, with wheel zoom, drag panning, and
   double-click reset
-- **Split** — source beside the live diagram, with a draggable divider
-- **Source** — plain text editing
+- **Split:** source beside the live diagram, with a draggable divider
+- **Source:** plain text editing
 
 Edits debounce into Orca's document protocol (`applyEdit` against the document
 version, so external changes surface as conflicts instead of silent clobbers),
